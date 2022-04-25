@@ -1,14 +1,18 @@
-import React from "react";
-import logo from "./logo.svg";
-import styles from "./app.module.less";
-import { Button } from "antd";
+import React, { FC } from "react";
+import { Routes, Route } from "react-router-dom";
+import Container from "./pages/container";
+import Login from "./pages/login";
+import Child from "./pages/child";
 
-function App() {
+const App: FC = () => {
   return (
-    <div className={styles.App}>
-      <Button type="primary">按钮</Button>
-    </div>
+    <Routes>
+      <Route key="main" element={<Container />}>
+        <Route index element={<Child />}></Route>
+      </Route>
+      <Route path="login" element={<Login />} />
+    </Routes>
   );
-}
+};
 
 export default App;

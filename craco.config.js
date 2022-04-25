@@ -75,5 +75,16 @@ module.exports = function (webpackEnv) {
         },
       },
     ],
+    devServer: {
+      port: 9000,
+      proxy: {
+        '/bsp': {
+          target: 'https://bimdc.bzlrobot.com',
+          changeOrigin: true,
+          secure: false,
+          xfwd: false,
+        }
+      }
+    }
   };
 };
