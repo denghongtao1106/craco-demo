@@ -6,37 +6,37 @@ import {
   VideoCameraOutlined,
 } from "@ant-design/icons";
 import React, { useEffect, useState } from "react";
-import { Routes, Route, Outlet } from "react-router-dom";
+import { Routes, Route, Outlet, useNavigate } from "react-router-dom";
 import menuHttp from "../../api/system/menu";
-import { menuData } from "./menuFakeData";
 import Child from "../child";
+import { useSelector } from "react-redux";
+import { selectMenuList } from "@/store/globalSlice";
 
 const { Header, Content, Footer, Sider } = Layout;
 
-export default () => {
-  const [menuList, setMenuList] = useState([]);
+const Container = () => {
+  const navigate = useNavigate();
+  const menuList = useSelector(selectMenuList);
+
   const formatMenuData = (menuList: any) => {
     const newMenuList = menuList.map((item: any) => ({
       icon: React.createElement(UserOutlined),
       key: item.bspCode,
       label: item.name,
+      url: item.url,
       children: item?.children?.length
         ? formatMenuData(item.children)
         : undefined,
     }));
     return newMenuList;
   };
-  const getMenuData = () => {
-    // const list = await menuHttp.fetchMenuList();
-    const formatData = formatMenuData(menuData);
-    console.log(formatData);
-    setMenuList(formatData);
-    // return menuData
-  };
 
-  useEffect(() => {
-    getMenuData();
-  }, []);
+  const formatMenuList = formatMenuData(menuList);
+
+  const onMenuSelect: any = ({ item }: any) => {
+    const { url } = item.props;
+    navigate(url);
+  };
 
   return (
     <Layout style={{ height: "100%" }}>
@@ -55,7 +55,8 @@ export default () => {
           theme="dark"
           mode="inline"
           defaultSelectedKeys={["4"]}
-          items={menuList}
+          items={formatMenuList}
+          onSelect={onMenuSelect}
         />
       </Sider>
       <Layout>
@@ -72,3 +73,5 @@ export default () => {
     </Layout>
   );
 };
+
+export default Container;

@@ -1,14 +1,14 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import "./index.less";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-import { HashRouter as Router } from "react-router-dom";
-import { Provider } from "react-redux";
-import { store } from "./store";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.less';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
+import { HashRouter as Router } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+  document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
