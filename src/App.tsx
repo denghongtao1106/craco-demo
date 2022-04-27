@@ -2,22 +2,35 @@ import React, { FC, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Container from "@/pages/container";
 import Login from "./pages/login";
-import Child from "./pages/child";
 
 import http from "@/api/system/menu";
 import { useDispatch } from "react-redux";
-import { setMenuList, selectMenuList } from "@/store/globalSlice";
+import {
+  setMenuList,
+  selectMenuList,
+  setMenuSelectedKeys,
+} from "@/store/globalSlice";
 import { useSelector } from "react-redux";
 import NotFound from "./pages/notFound";
+import { useRouteChange } from "./hooks/commonHooks";
+import { findTreeNodeInTree } from "./utils/common";
 
 const App: FC = () => {
   const dispath = useDispatch();
   const menuList = useSelector(selectMenuList);
+
   useEffect(() => {
     //异步请求拿到菜单数据
-    console.log("============");
     getMenuData();
   }, []);
+
+  useRouteChange((path: string) => {
+    if (path === "/" || !menuList.length) return;
+    const { bspCode } = findTreeNodeInTree(menuList, path, "url");
+    if (bspCode) {
+      dispath(setMenuSelectedKeys([bspCode]));
+    }
+  });
 
   const getMenuData = async () => {
     const menuData = await http.fetchMenuList();

@@ -1,5 +1,5 @@
-import $axios from "../../utils/axios";
-import { menuData } from "./menuFakeData";
+import $axios from '../../utils/axios';
+import { menuData } from './menuFakeData';
 
 export default {
   // 获取菜单数据
@@ -11,7 +11,7 @@ export default {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve(menuData);
-      }, 5000);
+      }, 500);
     });
   },
 };

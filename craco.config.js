@@ -1,32 +1,40 @@
-const CracoLessPlugin = require('craco-less');
-const { loaderByName } = require('@craco/craco');
-const CracoAntDesign = require('craco-antd');
-const path = require('path');
+const CracoLessPlugin = require("craco-less");
+const { loaderByName } = require("@craco/craco");
+const CracoAntDesign = require("craco-antd");
+const path = require("path");
 const pathResolve = (pathUrl) => path.join(__dirname, pathUrl);
+const WebpackBar = require("webpackbar");
+
 module.exports = function (webpackEnv) {
   const lessModuleRegex = /\.module\.less$/;
 
   return {
     webpack: {
       alias: {
-        '@': pathResolve('./src'),
+        "@": pathResolve("./src"),
       },
+      plugins: [
+        // webpack构建进度条
+        new WebpackBar({
+          profile: true,
+        }),
+      ],
     },
     babel: {
       presets: [],
       plugins: [
         // AntDesign 按需加载
         [
-          'import',
+          "import",
           {
-            libraryName: 'antd',
-            libraryDirectory: 'es',
+            libraryName: "antd",
+            libraryDirectory: "es",
             style: true,
           },
-          'antd',
+          "antd",
         ],
         [
-          '@babel/plugin-proposal-decorators',
+          "@babel/plugin-proposal-decorators",
           {
             legacy: true,
           },
@@ -47,7 +55,7 @@ module.exports = function (webpackEnv) {
                 如果项目中有使用TDesign或AntDesign组件库需要自定义主题，可以在modifyVars中添加对应less变量
             */
               modifyVars: {
-                '@primary-color': '#2378ff',
+                "@primary-color": "#2378ff",
               },
               javascriptEnabled: true,
             },
@@ -62,7 +70,7 @@ module.exports = function (webpackEnv) {
 
             // configure the generated local ident name
             const cssLoader = lessModuleRule.use.find(
-              loaderByName('css-loader')
+              loaderByName("css-loader")
             );
             cssLoader.options.modules = {
               /* 
@@ -71,7 +79,7 @@ module.exports = function (webpackEnv) {
                 - 这里使用css modules的命名规则
             */
 
-              localIdentName: '[local]_[hash:base64:5]',
+              localIdentName: "[local]_[hash:base64:5]",
             };
 
             return lessModuleRule;
@@ -82,8 +90,8 @@ module.exports = function (webpackEnv) {
     devServer: {
       port: 9000,
       proxy: {
-        '/bsp': {
-          target: 'https://bimdc.bzlrobot.com',
+        "/bsp": {
+          target: "https://bimdc.bzlrobot.com",
           changeOrigin: true,
           secure: false,
           xfwd: false,
