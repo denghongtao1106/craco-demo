@@ -1,13 +1,12 @@
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect } from 'react';
 
 const Overview: FC = () => {
   useEffect(() => {
-    debugger;
-    console.log("Overview");
+    console.log('Overview1');
   }, []);
   return (
     <div>
-      <span>Overview</span>
+      <span>Overview1</span>
     </div>
   );
 };
