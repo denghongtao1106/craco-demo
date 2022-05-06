@@ -16,6 +16,7 @@
     "@types/react-redux": "^7.1.24",
     "@types/react-router-dom": "^5.3.3",
     "antd": "4.20.1",
+    "antd-theme-generator": "^1.2.11",
     "axios": "^0.26.1",
     "craco-antd": "^1.19.0",
     "craco-less": "^2.0.0",
@@ -34,7 +35,7 @@
     "webpackbar": "^5.0.2"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "node color && craco start",
     "start:dev": "env-cmd -f .env.dev craco start",
     "build": "craco build",
     "test": "craco test",

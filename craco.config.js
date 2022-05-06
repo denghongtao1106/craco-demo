@@ -54,9 +54,9 @@ module.exports = function (webpackEnv) {
               /*
                 如果项目中有使用TDesign或AntDesign组件库需要自定义主题，可以在modifyVars中添加对应less变量
             */
-              modifyVars: {
-                "@primary-color": "#2378ff",
-              },
+              // modifyVars: {
+              //   "@primary-color": "#2378ff",
+              // },
               javascriptEnabled: true,
             },
           },

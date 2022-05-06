@@ -1,12 +1,13 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect } from "react";
+import "./index.less";
 
 const Overview: FC = () => {
   useEffect(() => {
-    console.log('Overview1');
+    console.log("Overview1");
   }, []);
   return (
     <div>
-      <span>Overview1</span>
+      <span className="box">Overview1</span>
     </div>
   );
 };
