@@ -1,23 +1,25 @@
-import Axios from "axios";
-import { message } from "antd";
-// import { store } from '@/store'
+import Axios from 'axios';
+// import { message } from 'antd';
+// import { store } from '@/store';
 // import { HashRouter } from 'react-router-dom'
 
 interface AxiosConfig {
   timeout: number;
   headers: {
-    "Content-Type": string;
+    'Content-Type': string;
   };
 }
 
 const config: AxiosConfig = {
   timeout: 600000,
   headers: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   },
 };
 
 const axios = Axios.create(config);
+
+axios.defaults.baseURL = process.env.REACT_APP_SERVER_API;
 
 // const router: CommonObjectType = new HashRouter({})
 
@@ -34,12 +36,14 @@ const axios = Axios.create(config);
 axios.interceptors.request.use(
   (req) => {
     const obj = {
-      BSP_TOKEN: "39cd78f495165a0d76c1c261d074d908",
-      BSP_USER_ENV_ID: "1320970534539886592",
-      BSP_USER_ID: "60468483",
-      BSP_USER_TENANT: "1320970534539886592",
+      BSP_TOKEN: '39cd78f495165a0d76c1c261d074d908',
+      BSP_USER_ENV_ID: '1320970534539886592',
+      BSP_USER_ID: '60468483',
+      BSP_USER_TENANT: '1320970534539886592',
     };
-    // const { token = '' } = store.getState().user.UserInfo || {}
+    // const menuList = store.getState().global.menuList || [];
+    // console.log(menuList);
+
     if (req.headers) {
       req.headers = { ...req.headers, ...obj };
     }
@@ -84,7 +88,7 @@ axios.interceptors.response.use(
 // @ts-ignore
 axios.post = (url: string, params?: object): Promise<any> =>
   axios({
-    method: "post",
+    method: 'post',
     url,
     data: params,
   });
@@ -92,7 +96,7 @@ axios.post = (url: string, params?: object): Promise<any> =>
 // get请求
 axios.get = (url: string, params?: object): Promise<any> =>
   axios({
-    method: "get",
+    method: 'get',
     url,
     params,
   });

@@ -2,6 +2,7 @@ import React, { FC, useEffect } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Container from "@/pages/container";
 import Login from "./pages/login";
+import MicroApp from "./pages/microApp";
 
 import http from "@/api/system/menu";
 import { useDispatch } from "react-redux";
@@ -113,6 +114,7 @@ const App: FC = () => {
         {/* <Route element={<Container />} children={getAllRoutes(menuList)} /> */}
         {getAllRoutes(menuList)}
         <Route path="login" element={<Login />} />
+        <Route path="/start/*" element={<MicroApp />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </IntlProvider>

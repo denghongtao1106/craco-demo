@@ -28,7 +28,7 @@ const persistConfig = {
   storage,
   // 以下是性能优化
   // whitelist = ['navigation']
-  // blacklist: ['menuTabList'],
+  // blacklist: ['global'],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

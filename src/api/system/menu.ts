@@ -14,4 +14,10 @@ export default {
       }, 500);
     });
   },
+  fetchFakeData(params?: object): Promise<any> {
+    return $axios.post(
+      "/bsp/user/ugs/ums/v1/user/menu/findUserMenuResList",
+      params
+    );
+  },
 };

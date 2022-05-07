@@ -1,15 +1,15 @@
-import { Breadcrumb, Layout, Menu, Tabs } from "antd";
-import "./index.less";
+import { Breadcrumb, Layout, Menu, Tabs } from 'antd';
+import './index.less';
 import {
   UploadOutlined,
   UserOutlined,
   VideoCameraOutlined,
-} from "@ant-design/icons";
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import { Routes, Route, Outlet, useNavigate, Link } from "react-router-dom";
-import menuHttp from "../../api/system/menu";
-import Child from "../child";
-import { useSelector } from "react-redux";
+} from '@ant-design/icons';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { Routes, Route, Outlet, useNavigate, Link } from 'react-router-dom';
+import menuHttp from '../../api/system/menu';
+import Child from '../child';
+import { useSelector } from 'react-redux';
 import {
   selectMenuList,
   selectMenuSelectedKeys,
@@ -17,10 +17,10 @@ import {
   setMenuList,
   setMenuSelectedKeys,
   setMenuTabList,
-} from "@/store/globalSlice";
-import { findTreeNodeInTree, getNodePath } from "@/utils/common";
-import { useDispatch } from "react-redux";
-import _ from "lodash";
+} from '@/store/globalSlice';
+import { findTreeNodeInTree, getNodePath } from '@/utils/common';
+import { useDispatch } from 'react-redux';
+import _ from 'lodash';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -58,7 +58,7 @@ const Container = () => {
   };
 
   const locateMenu = (url: string) => {
-    const selectItem = findTreeNodeInTree(formatMenuList, url, "url");
+    const selectItem = findTreeNodeInTree(formatMenuList, url, 'url');
     // updateTabList(selectItem);
     if (selectItem.key) {
       dispatch(setMenuSelectedKeys([selectItem.key]));
@@ -109,7 +109,7 @@ const Container = () => {
     try {
       Component = require(`@/pages${url}`).default;
     } catch (error) {
-      console.error("请添加对应路由的组件");
+      console.error('请添加对应路由的组件');
     }
 
     const content = Boolean(Component) ? <Component /> : null;
@@ -117,7 +117,7 @@ const Container = () => {
   };
 
   return (
-    <Layout style={{ height: "100%" }}>
+    <Layout style={{ height: '100%' }}>
       <Sider
         breakpoint="lg"
         collapsedWidth="0"
@@ -148,19 +148,19 @@ const Container = () => {
         <div className="content-wrapper">
           <Tabs
             type={
-              menuTabList && menuTabList.length > 1 ? "editable-card" : "card"
+              menuTabList && menuTabList.length > 1 ? 'editable-card' : 'card'
             }
             size="small"
             hideAdd
             tabPosition="top"
-            style={{ height: "100%" }}
+            style={{ height: '100%' }}
             activeKey={menuSelectedKeys[0]}
             onChange={(key) => {
-              const selectItem = findTreeNodeInTree(menuList, key, "bspCode");
+              const selectItem = findTreeNodeInTree(menuList, key, 'bspCode');
               navigate(selectItem.url);
             }}
             onEdit={(key, action) => {
-              if (action === "remove") {
+              if (action === 'remove') {
                 const copyTabList = _.cloneDeep(menuTabList);
                 const index = copyTabList.findIndex(
                   (item: any) => item.bspCode === key
