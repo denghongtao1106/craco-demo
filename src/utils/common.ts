@@ -18,23 +18,32 @@ export const treeToArray = (tree: any) => {
   return result;
 };
 
-export const findTreeNodeInTree: any = (
-  tree: any,
-  nodeId: string,
-  idAttr: string = 'key'
-) => {
-  let target = null;
-  for (let i = 0; i < tree.length; i++) {
-    const treeNode = tree[i];
-    const { children } = treeNode;
-    if (treeNode[idAttr] === nodeId) {
-      return (target = treeNode);
-    }
-    if (children?.length) {
-      return findTreeNodeInTree(children, nodeId, idAttr);
+/* 
+通过某一属性找到树中的节点
+ */
+export const findTreeNodeInTree = (
+  element: any,
+  id: string,
+  idAttr: string = "key"
+): any => {
+  // 根据id查找节点
+  return findNode(element, (node: any) => {
+    return node[idAttr] === id;
+  });
+};
+
+/* 
+通过指定的查询规则查找树节点
+ */
+export const findNode = (tree: any, func: any): any => {
+  for (const node of tree) {
+    if (func(node)) return node;
+    if (node.children) {
+      const res = findNode(node.children, func);
+      if (res) return res;
     }
   }
-  return target||{};
+  return null;
 };
 
 /**

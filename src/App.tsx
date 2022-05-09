@@ -37,6 +37,10 @@ const App: FC = () => {
   useRouteChange((path: string) => {
     if (path === "/" || !menuList.length) return;
     const selectItem = findTreeNodeInTree(menuList, path, "url");
+    console.log("999");
+
+    console.log(selectItem);
+
     const hasMenuChildren =
       selectItem.children &&
       selectItem.children.some((subItem: any) => Boolean(subItem.enable));
