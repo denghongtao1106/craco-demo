@@ -6,11 +6,14 @@ import { useDispatch } from "react-redux";
 import { setLocalLanguage } from "../../store/globalSlice";
 import http from "@/api/system/menu";
 import { useHttp } from "@/hooks/commonHooks";
+import MyApp from "./MyApp";
 
 const Platform: FC = () => {
   const { formatMessage: intl } = useIntl();
   const dispatch = useDispatch();
   const flag = useRef(false);
+
+  const divRef = useRef(null);
 
   const { loading, successData, failData, sendRequest } = useHttp();
 
@@ -18,6 +21,7 @@ const Platform: FC = () => {
 
   useEffect(() => {
     console.log("platform");
+    (divRef.current as any)?.sayHello();
     console.log(process.env.REACT_APP_SERVER_API);
   }, []);
 
@@ -75,7 +79,7 @@ const Platform: FC = () => {
         英文
       </Button>
       <Button onClick={() => dispatch(setLocalLanguage("zh-CN"))}>中文</Button>
-
+      <MyApp ref={divRef} />
       <Button onClick={changeTheme}>改变主题</Button>
       <Button loading={loading} onClick={goRequest}>
         发起请求
