@@ -9,12 +9,11 @@ import { useHttp } from "@/hooks/commonHooks";
 import MyApp from "./MyApp";
 import kscreenshot from "kscreenshot";
 
-let kscreenInstance: any = null;
-
 const Platform: FC = () => {
   const { formatMessage: intl } = useIntl();
   const dispatch = useDispatch();
   const flag = useRef(false);
+  const kscreenInstance = useRef(null);
 
   const divRef = useRef(null);
 
@@ -27,7 +26,7 @@ const Platform: FC = () => {
     (divRef.current as any)?.sayHello();
     console.log(process.env.REACT_APP_SERVER_API);
 
-    kscreenInstance = new kscreenshot({
+    kscreenInstance.current = new kscreenshot({
       key: 65,
       endCB: (res: any) => {
         console.log(res);
@@ -79,7 +78,7 @@ const Platform: FC = () => {
   };
 
   const startScreen = () => {
-    kscreenInstance.startScreenShot();
+    (kscreenInstance.current as any)?.startScreenShot();
   };
 
   return (
