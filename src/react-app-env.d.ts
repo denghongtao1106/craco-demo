@@ -1,5 +1,5 @@
 /// <reference types="react-scripts" />
-
+declare module "kscreenshot";
 declare module "*.module.less" {
   const classes: {
     readonly [key: string]: string;

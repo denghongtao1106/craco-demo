@@ -7,6 +7,9 @@ import { setLocalLanguage } from "../../store/globalSlice";
 import http from "@/api/system/menu";
 import { useHttp } from "@/hooks/commonHooks";
 import MyApp from "./MyApp";
+import kscreenshot from "kscreenshot";
+
+let kscreenInstance: any = null;
 
 const Platform: FC = () => {
   const { formatMessage: intl } = useIntl();
@@ -23,6 +26,13 @@ const Platform: FC = () => {
     console.log("platform");
     (divRef.current as any)?.sayHello();
     console.log(process.env.REACT_APP_SERVER_API);
+
+    kscreenInstance = new kscreenshot({
+      key: 65,
+      endCB: (res: any) => {
+        console.log(res);
+      },
+    });
   }, []);
 
   const changeTheme = () => {
@@ -68,6 +78,10 @@ const Platform: FC = () => {
     // http.fetchFakeData({ project: '124' }).then((res) => console.log(res));
   };
 
+  const startScreen = () => {
+    kscreenInstance.startScreenShot();
+  };
+
   return (
     <div className={styles.platformWrapper}>
       <span className="primary-bg">Platform</span>
@@ -84,6 +98,7 @@ const Platform: FC = () => {
       <Button loading={loading} onClick={goRequest}>
         发起请求
       </Button>
+      <Button onClick={startScreen}>开始截屏</Button>
 
       <span>{successData?.msg}</span>
       <div id="container" style={{ width: "100%", height: 400 }}></div>
